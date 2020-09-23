@@ -1,11 +1,12 @@
 import React from "react";
 
 import Layout from "../../components/Layout";
+import ContainerNewProduct from "../../components/ContainerNewProduct";
 
 const NewProduct = () => {
   return (
     <Layout>
-      <div>nuevo producto</div>
+      <ContainerNewProduct />
     </Layout>
   );
 };

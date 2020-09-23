@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 nav {
   background-color: #0d4172;
 }
@@ -19,4 +14,19 @@ nav {
 .nav-link {
   line-height: 45px;
   color: white !important;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1440px;
+    padding-right: 5vw;
+    padding-left: 5vw;
+  }
+}
+
+@media (min-width: 1470px) {
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 }
