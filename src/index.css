@@ -15,6 +15,9 @@ nav {
   line-height: 45px;
   color: white !important;
 }
+.error-message {
+  display: block;
+}
 
 @media (min-width: 768px) {
   .container {
