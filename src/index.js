@@ -1,20 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
-import { BrowserRouter } from "react-router-dom";
+// Redux
+import { Provider } from "react-redux";
+import makeStore from "./redux/makeStore";
 
 // add bootstrap css
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css"; // global css
 
+const store = makeStore();
+
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
