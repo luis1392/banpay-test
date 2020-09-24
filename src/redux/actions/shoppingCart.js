@@ -10,11 +10,11 @@ export function addToCart(product) {
   };
 }
 
-export function deleteToCart(id) {
+export function deleteToCart(product) {
   return async (dispatch) => {
     dispatch({
       type: DELETE_CART,
-      payload: id,
+      payload: product,
     });
   };
 }

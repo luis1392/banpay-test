@@ -6,3 +6,7 @@ export const BlockProduct = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const ContainerTable = styled.div`
+  margin: 40px 0 10px 0;
+`;

@@ -19,7 +19,7 @@ export const ButtonPrimary = styled.button.attrs((props) => ({
     font-weight: 700;
     white-space: nowrap;
     outline: none !important;
-    margin: ${(props) => props.margin || "auto"};
+    margin: ${(props) => props.margin || " 10px auto"};
     border: initial;
     justify-content: center;
 
@@ -42,4 +42,22 @@ export const ButtonPrimary = styled.button.attrs((props) => ({
       cursor: not-allowed;
     }
   }
+`;
+
+export const ButtonClose = styled.button.attrs((props) => ({
+  type: props.submit || props.type === "submit" ? "submit" : "button",
+  className: "btn",
+}))`
+  width: fit-content;
+  height: 36px;
+  background-color: red !important;
+  color: white !important;
+  padding: 0px 30px !important;
+  border-radius: 25px !important;
+  font-family: Lato;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  display: block !important;
+  outline: none !important;
+  margin: 10px auto;
 `;

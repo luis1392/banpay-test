@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as productActions from "../../redux/actions/product";
 
 import { ButtonPrimary } from "../../styles/Buttons";
+import { BlockForm } from "../../styles/Forms";
 
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
@@ -26,7 +27,6 @@ const createProductSchema = Yup.object({
 });
 
 const NewProductForm = (props) => {
-  console.log(props);
   const newProduct = async (values) => {
     const product = {
       id: "_" + Math.random().toString(36).substr(2, 9),
@@ -38,7 +38,7 @@ const NewProductForm = (props) => {
   };
 
   return (
-    <div>
+    <BlockForm>
       <Formik
         initialValues={{
           name: "",
@@ -65,7 +65,7 @@ const NewProductForm = (props) => {
           </Form>
         )}
       </Formik>
-    </div>
+    </BlockForm>
   );
 };
 
