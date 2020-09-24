@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -27,6 +27,7 @@ const createProductSchema = Yup.object({
 });
 
 const NewProductForm = (props) => {
+  const [productCreated, setProductCreated] = useState(false);
   const newProduct = async (values) => {
     const product = {
       id: "_" + Math.random().toString(36).substr(2, 9),
@@ -39,6 +40,9 @@ const NewProductForm = (props) => {
 
   return (
     <BlockForm>
+      {productCreated && (
+        <div className="alert alert-success">Producto agregado</div>
+      )}
       <Formik
         initialValues={{
           name: "",
@@ -46,9 +50,13 @@ const NewProductForm = (props) => {
           inventory: "",
         }}
         validationSchema={createProductSchema}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
           await newProduct(values);
           setSubmitting(false);
+          setProductCreated(true);
+          resetForm({
+            values: "",
+          });
         }}
       >
         {({ values, isSubmitting }) => (
