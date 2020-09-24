@@ -11,7 +11,6 @@ import { ButtonPrimary, ButtonClose } from "../../styles/Buttons";
 import TableShoppingCart from "../TableShoppingCart";
 
 const ProductList = (props) => {
-  console.log(props);
   const handlerAddToCart = async (item) => {
     const newItem = {
       id: item.id,
@@ -20,7 +19,13 @@ const ProductList = (props) => {
       inventory: item.inventory,
       quantity: 1,
     };
-    await props.addToCart(newItem);
+    const filterItem = props.productReducer.products.find(
+      (product) => product.id === item.id
+    );
+    if (filterItem.inventory > 0) {
+      await props.addToCart(newItem);
+      await props.removeToInventory(newItem);
+    }
   };
 
   const handlerDeleteToCart = async (item) => {
@@ -31,7 +36,16 @@ const ProductList = (props) => {
       inventory: item.inventory,
       quantity: 1,
     };
-    await props.deleteToCart(newItem);
+
+    if (props.shoppingCartReducer.shoppingCart !== null) {
+      const filterItemCart = props.shoppingCartReducer.shoppingCart.find(
+        (product) => product.id === item.id
+      );
+      if (filterItemCart.quantity > 0) {
+        await props.deleteToCart(newItem);
+        await props.addToInventory(newItem);
+      }
+    }
   };
   const renderProductList = () => {
     // Generate product item.
@@ -82,6 +96,8 @@ const mapStateToProps = ({ productReducer, shoppingCartReducer }) => {
 };
 const actions = {
   newProduct: productActions.newProduct,
+  addToInventory: productActions.addToInventory,
+  removeToInventory: productActions.removeToInventory,
   addToCart: shoppingCartActions.addToCart,
   deleteToCart: shoppingCartActions.deleteToCart,
 };

@@ -9,6 +9,7 @@ export default function reducer(state = initialState, action) {
     case ADD_CART:
       if (state.shoppingCart !== null) {
         const item = state.shoppingCart.find(
+          //find product by id
           (product) => product.id === action.payload.id
         );
 
@@ -33,9 +34,11 @@ export default function reducer(state = initialState, action) {
       };
     case DELETE_CART:
       if (state.shoppingCart === null) {
+        //return state if is null
         return state;
       }
       const item = state.shoppingCart.find(
+        //find product by id
         (product) => product.id === action.payload.id
       );
 

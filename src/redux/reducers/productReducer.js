@@ -1,4 +1,9 @@
-import { NEW_PRODUCT, DELETE_PRODUCT } from "../types/productTypes";
+import {
+  NEW_PRODUCT,
+  DELETE_PRODUCT,
+  ADD_TO_INVENTORY,
+  REMOVE_TO_INVENTORY,
+} from "../types/productTypes";
 const initialState = {
   products: [
     {
@@ -21,6 +26,38 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case NEW_PRODUCT:
       return { ...action, products: [...state.products, action.payload] };
+
+    case REMOVE_TO_INVENTORY:
+      const item = state.products.find(
+        //find product by id
+        (product) => product.id === action.payload.id
+      );
+      if (item) {
+        item.inventory = item.inventory - 1;
+        Object.assign(state.products, item);
+        return {
+          ...action,
+          products: [...state.products],
+        };
+      }
+      return { ...action, products: [...state.products, action.payload] };
+
+    case ADD_TO_INVENTORY:
+      const itemToAdd = state.products.find(
+        //find product by id
+        (product) => product.id === action.payload.id
+      );
+      if (itemToAdd) {
+        itemToAdd.inventory = itemToAdd.inventory + 1;
+        Object.assign(state.products, itemToAdd);
+        return {
+          ...action,
+          products: [...state.products],
+        };
+      }
+
+      return { ...action, products: [...state.products, action.payload] };
+
     case DELETE_PRODUCT:
       return {
         ...action,
