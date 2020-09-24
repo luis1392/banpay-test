@@ -6,70 +6,17 @@ import * as productActions from "../../redux/actions/product";
 import * as shoppingCartActions from "../../redux/actions/shoppingCart";
 
 import { Row, Col } from "../../styles/Grid";
-import { BlockProduct } from "../../styles/Product";
-import { ButtonPrimary, ButtonClose } from "../../styles/Buttons";
 import TableShoppingCart from "../TableShoppingCart";
 
+import ProductItem from "../ProductItem";
+
 const ProductList = (props) => {
-  const handlerAddToCart = async (item) => {
-    const newItem = {
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      inventory: item.inventory,
-      quantity: 1,
-    };
-    const filterItem = props.productReducer.products.find(
-      (product) => product.id === item.id
-    );
-    if (filterItem.inventory > 0) {
-      await props.addToCart(newItem);
-      await props.removeToInventory(newItem);
-    }
-  };
-
-  const handlerDeleteToCart = async (item) => {
-    const newItem = {
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      inventory: item.inventory,
-      quantity: 1,
-    };
-
-    if (props.shoppingCartReducer.shoppingCart !== null) {
-      const filterItemCart = props.shoppingCartReducer.shoppingCart.find(
-        (product) => product.id === item.id
-      );
-      if (filterItemCart.quantity > 0) {
-        await props.deleteToCart(newItem);
-        await props.addToInventory(newItem);
-      }
-    }
-  };
   const renderProductList = () => {
     // Generate product item.
     const product = props.productReducer.products.map((element) => {
       return (
         <Col xl="4" lg="4" md="4" sm="4" key={element.id}>
-          <BlockProduct>
-            <img src="https://picsum.photos/200" alt="producto" />
-            <span>{element.name}</span>
-            <span>Precio: ${element.price}</span>
-            <span>Cantidad disponible: {element.inventory}</span>
-            <ButtonPrimary
-              type="button"
-              onClick={() => handlerAddToCart(element)}
-            >
-              Agregar al carrito
-            </ButtonPrimary>
-            <ButtonClose
-              type="button"
-              onClick={() => handlerDeleteToCart(element)}
-            >
-              Quitar del carrito
-            </ButtonClose>
-          </BlockProduct>
+          <ProductItem product={element} />
         </Col>
       );
     });
@@ -95,7 +42,6 @@ const mapStateToProps = ({ productReducer, shoppingCartReducer }) => {
   };
 };
 const actions = {
-  newProduct: productActions.newProduct,
   addToInventory: productActions.addToInventory,
   removeToInventory: productActions.removeToInventory,
   addToCart: shoppingCartActions.addToCart,
