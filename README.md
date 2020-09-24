@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Run App
+## Steps to run the application and available scripts
 
 Clone the repository
 
